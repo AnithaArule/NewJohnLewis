@@ -29,14 +29,38 @@ Feature: Smoke test pack for john lewis
       |Branch|
       |Glasgow|
 
+    @temp
 
-      @temp
       Scenario: Check item can be added to the basket
 
         Given user is in home page
         When I search for "Computers"
         And added an item to the basket with title "Buy HP Envy 15-AE002NA Laptop PC, Intel Core i7, 12GB RAM, 256GB,15.6"
         Then an item should be available in basket
+
+@SpecialOffers
+  Scenario Outline:check user can add a product from special offers
+        Given user is in home page
+        Given user is in special offers page
+        When user selects "<CategoryList>"
+        And user added an item from the productList "<Product>"
+        Then the Product should be added to basket
+    Examples:
+
+  |CategoryList|  |Product|
+  |Computing Offers| |HP Envy 17-k206na Laptop, Intel Core i7, 16GB RAM, 1TB + 8GB SSD, 17.3", Silver |
+
+  @SportsLeisure
+  Scenario Outline: check user can add a product from Sport&Leisure
+        Given User is in home Page
+        When user selects Sports&Leisure
+        When user selects an item"<SportCategoryList>"
+        When user added an item from "<SportsProduct>"
+        Then the Sports Product should be added to basket
+    Examples:
+     |SportCategoryList|                  |SportsProduct  |
+      |Badminton & Squash         ||Yonex Nanoray 20 Badminton Racquet, White/Red|
+
 
 
 

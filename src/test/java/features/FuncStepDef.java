@@ -13,10 +13,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import pages.Basketpage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.SearchResultPage;
+import pages.*;
 
 import java.util.Map;
 
@@ -30,6 +27,8 @@ public class FuncStepDef {
     private HomePage homePage;
     private SearchResultPage searchResultPage;
     private Basketpage basketpage;
+    private SportsLeisurePage sportsLeisurePage;
+    private SpecialOffersPage specialOffersPage;
 
 
 
@@ -104,7 +103,7 @@ public class FuncStepDef {
     @And("^the brand name should be shown as \"([^\"]*)\"$")
     public void the_brand_name_should_be_shown_brand_name_in_header_as(String header) throws Throwable {
 
-        VerifyUtils.True("Checking if user can see header",homePage.checkHeader(header));
+        VerifyUtils.True("Checking if user can see header", homePage.checkHeader(header));
     }
 
     @And("^show the below elements$")
@@ -122,7 +121,7 @@ public class FuncStepDef {
     @Then("^a button with name \"(.*?)\" is shown$")
     public void a_button_with_name_is_shown(String buttontext) throws Throwable {
 
-        VerifyUtils.True("Checking the button with text is "+buttontext,homePage.getButton(buttontext));
+        VerifyUtils.True("Checking the button with text is " + buttontext, homePage.getButton(buttontext));
     }
 
     @When("^(?:open|close) the ham burger menu$")
@@ -195,4 +194,73 @@ public class FuncStepDef {
 
 
     }
+
+    @Given("^user is in special offers page$")
+    public void user_is_in_special_offers_page() throws Throwable {
+        homePage = new HomePage();
+        homePage.specialOffers();
+    }
+
+    @When("^user selects \"(.*?)\"$")
+    public void user_selects(String arg1) throws Throwable {
+        SpecialOffersPage specialOffersPage = new SpecialOffersPage();
+        specialOffersPage.clickCategoryList();
+        specialOffersPage.verifyUserIsInCategoryList(arg1);
+
+    }
+
+    @When("^user added an item from the productList \"(.*?)\", Silver\"$")
+    public void user_added_an_item_from_the_productList_Silver(String arg1) throws Throwable {
+        SpecialOffersPage specialOffersPage= new SpecialOffersPage();
+        specialOffersPage.addProductFromCategory();
+
+    }
+
+    @Then("^the Product should be added to basket$")
+    public void the_Product_should_be_added_to_basket() throws Throwable {
+        SpecialOffersPage specialOffersPage= new SpecialOffersPage();
+        specialOffersPage.VerifyAddedToBasket();
+        System.out.println("after Verify");
+
+    }
+
+
+
+    @Given("^User is in home Page$")
+    public void user_is_in_home_Page() throws Throwable {
+    HomePage homePage=new HomePage();
+    }
+
+    @When("^user selects Sports&Leisure$")
+    public void user_selects_Sports_Leisure() throws Throwable {
+        HomePage homePage=new HomePage();
+        homePage.sportsLeisure();
+    }
+
+    @When("^user selects an item\"(.*?)\"$")
+    public void user_selects_an_item(String arg1) throws Throwable {
+        String arg3 = "Sport & Leisure";
+
+        SportsLeisurePage sportsLeisurePage = new SportsLeisurePage();
+        sportsLeisurePage.clickSportsCategoryList();
+        sportsLeisurePage.verifyUserIsInSportsCategoryList(arg3);
+
+    }
+
+    @When("^user added an item from \"(.*?)\"$")
+    public void user_added_an_item_from(String arg1) throws Throwable {
+        SportsLeisurePage sportsLeisurePage= new SportsLeisurePage();
+        sportsLeisurePage.addProductFromCategory();
+
+    }
+
+    @Then("^the Sports Product should be added to basket$")
+    public void the_Sports_Product_should_be_added_to_basket() throws Throwable {
+       SportsLeisurePage sportsLeisurePage = new SportsLeisurePage();
+        sportsLeisurePage.VerifyAddedToBasket();
+        System.out.println("after Verify");
+
+    }
+
+
 }

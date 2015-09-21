@@ -45,6 +45,11 @@ public class HomePage extends BasePage {
     @FindBy(how = How.NAME, using = "search-keywords")
     public WebElement keyword_input_textbox;
 
+    @FindBy(how = How.LINK_TEXT, using = "Special Offers")
+    public WebElement Special_Offers;
+
+    @FindBy(how = How.XPATH, using = "//div[9]/a/span")
+    public WebElement SportsLeisure;
 
 
     public HomePage() {
@@ -131,4 +136,15 @@ public class HomePage extends BasePage {
         //click on search button
         keyword_input_textbox.sendKeys(Keys.ENTER.toString());
     }
+
+    public void specialOffers(){
+        Special_Offers.click();
+        Utils.sleep(1);
+    }
+
+    public void sportsLeisure(){
+        SportsLeisure.click();
+        Utils.sleep(1);
+    }
+
 }

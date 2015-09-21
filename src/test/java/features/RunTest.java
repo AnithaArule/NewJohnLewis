@@ -21,7 +21,7 @@ import java.net.URL;
 
 @RunWith(Cucumber.class)
 @Cucumber.Options(format = {"pretty","html:target/whisper-html-report","json:target/whisper_report.json"},
-tags = {"@temp"}
+tags = {"@temp, @SpecialOffers, @SportsLeisure"}
 )
 public class RunTest{
     static WebDriver driver;
